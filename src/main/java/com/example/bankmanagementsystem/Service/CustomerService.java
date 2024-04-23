@@ -77,13 +77,13 @@ public class CustomerService {
     }
 
     //method to Active a bank account
-    public Account activateAccount( Integer accountId) {
+    public void activateAccount( Integer accountId) {
             Account account = accountRepository.findAccountById(accountId);
             if (account == null) {
                 throw new ApiException("Account not found!");
             }
             account.setIsActive(true);
-            return accountRepository.save(account);
+            accountRepository.save(account);
     }
 
     //method to View account details
@@ -105,14 +105,16 @@ public class CustomerService {
     }
 
     //method to Deposit and withdraw money
-    public Account depositMoney(Integer accountId, Integer amount) {
-        // similar for withdrawal
+    public void depositMoney(Integer accountId, Integer amount) {
         Account account = accountRepository.findAccountById(accountId);
         if (account == null) {
             throw new ApiException("Account not found!");
         }
+        if (amount<1){
+            throw new ApiException("please enter positive number!");
+        }
         account.setBalance(account.getBalance() + amount);
-        return accountRepository.save(account);
+        accountRepository.save(account);
     }
 
     //method to Transfer funds between accounts
@@ -122,6 +124,11 @@ public class CustomerService {
         Account toAccount = accountRepository.findAccountById(toAccountId);
         if (fromAccount == null || toAccount == null) {
             throw new ApiException("Account not found!");
+        }
+        if (amount < 1){
+            throw new ApiException("the amount less than 1");
+        }else if (amount > fromAccount.getBalance()){
+            throw new ApiException("the amount is more than balance!");
         }
         fromAccount.setBalance(fromAccount.getBalance() - amount);
         toAccount.setBalance(toAccount.getBalance() + amount);
@@ -133,13 +140,13 @@ public class CustomerService {
 
 
 
-    //method to Block bank account via admin!
-    public Account blockAccount(Integer accountId) {
+    //method to Block bank account via admin!>> change the isActive
+    public void blockAccount(Integer accountId) {
         Account account = accountRepository.findAccountById(accountId);
         if (account == null) {
             throw new ApiException("Account not found!");
         }
         account.setIsActive(false);
-        return accountRepository.save(account);
+        accountRepository.save(account);
     }
 }

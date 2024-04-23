@@ -23,16 +23,17 @@ public class Account {
     private Integer id;
 
     @NotNull(message = "please fill account number!")
-    @Pattern(regexp = "\\d{4}-\\d{4}-\\d{4}-\\d{4}") // must follow a specific format! (e.g., "XXXX-XXXX-XXXX-XXXX").
-    @Column(columnDefinition = "int not null")
-    private Integer accountNumber;
+    @Pattern(regexp = "^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$") // must follow a specific format! (e.g., "XXXX-XXXX-XXXX-XXXX").
+    @Column(columnDefinition = "varchar(20) not null")
+    private String accountNumber;
 
     @NotNull(message = "please fill the balance!")
     @Positive(message = "please enter only the positive numbers!")
-    @Column(columnDefinition = "boolean not null")
+    @Column(columnDefinition = "int not null")
     private Integer balance;
 
     @AssertFalse
+    @Column(columnDefinition = "boolean not null")
     private Boolean isActive;
 
     //    //Many Accounts May Have One Customer (ManyToOne)

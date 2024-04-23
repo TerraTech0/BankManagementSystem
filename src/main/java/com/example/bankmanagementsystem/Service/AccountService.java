@@ -26,7 +26,10 @@ public class AccountService {
         if (customer == null){
             throw new ApiException("customer not found!");
         }
+        customer.getAccounts().add(account);
+        account.setCustomer(customer);
         accountRepository.save(account);
+        customerRepository.save(customer);
     }
 
 
