@@ -40,10 +40,11 @@ public class EmployeeService {
         if (user == null){
             throw new ApiException("User not found!");
         }
+        employee.setUser(user);
         user.setEmployee(employee);
         user.setRole("EMPLOYEE");
-        userRepository.save(user);
         employeeRepository.save(employee);
+        userRepository.save(user);
     }
 
 

@@ -4,6 +4,7 @@ import com.example.bankmanagementsystem.Api.ApiResponse;
 import com.example.bankmanagementsystem.Model.Employee;
 import com.example.bankmanagementsystem.Repository.EmployeeRepository;
 import com.example.bankmanagementsystem.Service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ public class EmployeeController {
 
     //by admin
     @PostMapping("/add/{userId}")//done
-    public ResponseEntity addEmployee(@PathVariable Integer userId, @AuthenticationPrincipal Employee employee){
+    public ResponseEntity addEmployee(@PathVariable Integer userId, @RequestBody @Valid  Employee employee){
         logger.info("inside Add Employee!");
         employeeService.addEmployee(userId, employee);
         return ResponseEntity.ok().body(new ApiResponse("employee added successfully!"));
@@ -47,7 +48,7 @@ public class EmployeeController {
 
     //by admin
     @PutMapping("/update/{emp_id}")//done
-    public ResponseEntity updateEmployee(@PathVariable Integer emp_id, @AuthenticationPrincipal Employee employee){
+    public ResponseEntity updateEmployee(@PathVariable Integer emp_id, @RequestBody @Valid Employee employee){
         logger.info("inside Update Employee!");
         employeeService.updateEmployee(emp_id, employee);
         return ResponseEntity.ok().body(new ApiResponse("employee updated successfully!"));

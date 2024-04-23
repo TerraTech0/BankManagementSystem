@@ -28,11 +28,16 @@ public class CustomerService {
         if (user==null){
             throw new ApiException("user not found!");
         }
+        customer.setUser(user);
         user.setCustomer(customer);
         user.setRole("CUSTOMER");
         customerRepository.save(customer);
         userRepository.save(user);
     }
+
+
+
+
 
     //update Customer
     public void updateCustomer(Integer customerId, Customer customer){

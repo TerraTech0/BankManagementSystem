@@ -20,7 +20,7 @@ public class AccountController {
 
     //customer
     @PostMapping("/add/{customerId}")//done
-    public ResponseEntity addAccount(@PathVariable Integer customerId, @AuthenticationPrincipal Account account){
+    public ResponseEntity addAccount(@PathVariable Integer customerId, @RequestBody Account account){
         logger.info("inside Add Account!");
         accountService.addAccount(customerId, account);
         return ResponseEntity.ok().body(new ApiResponse("account added successfully!"));
@@ -28,7 +28,7 @@ public class AccountController {
 
     //customer
     @PutMapping("/update/{customerId}")//done
-    public ResponseEntity updateAccount(@PathVariable Integer customerId, @AuthenticationPrincipal Account account){
+    public ResponseEntity updateAccount(@PathVariable Integer customerId, @RequestBody Account account){
         logger.info("inside update Account!");
         accountService.updateAccount(customerId, account);
         return ResponseEntity.ok().body(new ApiResponse("account updated successfully!"));

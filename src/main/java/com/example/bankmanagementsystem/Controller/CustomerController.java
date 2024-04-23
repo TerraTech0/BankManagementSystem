@@ -5,6 +5,7 @@ import com.example.bankmanagementsystem.Model.Account;
 import com.example.bankmanagementsystem.Model.Customer;
 import com.example.bankmanagementsystem.Repository.CustomerRepository;
 import com.example.bankmanagementsystem.Service.CustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class CustomerController {
 
     //customer
     @PostMapping("/add/{userId}")//done
-    public ResponseEntity addCustomer(@PathVariable Integer userId, @AuthenticationPrincipal Customer customer){
+    public ResponseEntity addCustomer(@PathVariable Integer userId, @RequestBody @Valid Customer customer){
         logger.info("inside Add Customer!");
         customerService.addCustomer(userId, customer);
         return ResponseEntity.ok().body(new ApiResponse("customer added successfully!"));
@@ -33,7 +34,7 @@ public class CustomerController {
 
     //customer
     @PutMapping("/update/{customerId}")//done
-    public ResponseEntity updateCustomer(@PathVariable Integer customerId, @AuthenticationPrincipal Customer customer){
+    public ResponseEntity updateCustomer(@PathVariable Integer customerId, @RequestBody @Valid  Customer customer){
         logger.info("inside Update Customer!");
         customerService.updateCustomer(customerId, customer);
         return ResponseEntity.ok().body(new ApiResponse("customer updated successfully!"));
@@ -56,7 +57,7 @@ public class CustomerController {
 
     //by customer
     @PostMapping("/create-acccount/{customerId}")//done
-    public ResponseEntity createAccount(@PathVariable Integer customerId, @AuthenticationPrincipal Account account ){
+    public ResponseEntity createAccount(@PathVariable Integer customerId, @RequestBody @Valid  Account account ){
         logger.info("inside Create Account!");
         customerService.createAccount(customerId, account);
         return ResponseEntity.ok().body(new ApiResponse("account created successfully!"));

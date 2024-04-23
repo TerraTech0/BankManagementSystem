@@ -25,7 +25,7 @@ public class Customer {
     private Integer id;
 
     @NotEmpty(message = "please fill the phone number!")
-    @Pattern(regexp = "^05")
+    @Pattern(regexp = "^(05)[0-9]+$")
     @Column(columnDefinition = "varchar(10) not null")
     private String phoneNumber;
 

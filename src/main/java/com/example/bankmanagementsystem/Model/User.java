@@ -53,12 +53,11 @@ public class User implements UserDetails {
     private String role; //CUSTOMER, EMPLOYEE, ADMIN!
 
 
-
-//    //Relation , User can be an employee or a customer (OneToOne)
+    //    //Relation , User can be an employee or a customer (OneToOne)
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 //    @PrimaryKeyJoinColumn
 //    private Employee employee;
-//
+//    //
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 //    @PrimaryKeyJoinColumn
 //    private Customer customer;

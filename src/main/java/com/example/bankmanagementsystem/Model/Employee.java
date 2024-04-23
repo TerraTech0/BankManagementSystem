@@ -34,14 +34,13 @@ public class Employee {
 
 
     //User can be an employee or a customer (OneToOne).
-//    @OneToOne
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    private User user;
+
+//    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "user_id", referencedColumnName = "id")
 //    @MapsId
-//    @JsonIgnore
 //    private User user;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @MapsId
-    private User user;
 }
